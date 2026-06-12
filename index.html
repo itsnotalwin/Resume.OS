@@ -898,11 +898,6 @@
       // Background
       ctx.fillStyle = '#080808';
       ctx.fillRect(0, 0, size, size);
-      // Green accent strip (top) — skip on tiny sizes
-      if (!small) {
-        ctx.fillStyle = '#33aa33';
-        ctx.fillRect(0, 0, size, Math.max(3, size * 0.025));
-      }
       // "AN" monogram
       const fontSize = small ? Math.round(size * 0.52) : Math.round(size * 0.38);
       ctx.font = `bold ${fontSize}px 'Arial Narrow', Arial, sans-serif`;
