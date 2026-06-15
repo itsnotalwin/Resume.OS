@@ -1,461 +1,941 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Alwin Newman</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --black: #080808;
-    --white: #f0f0f0;
-    --grey: #888;
-    --dim: #333;
-    --line: #1e1e1e;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Mono', monospace;
-    font-weight: 300;
-    cursor: crosshair;
-    overflow-x: hidden;
-  }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Alwin Newman — Customs & Logistics Coordinator | Gauteng</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Alwin Newman — Customs & Logistics Coordinator based in Gauteng, South Africa. Experience in import/export coordination, SARS compliance, road freight, and warehouse operations at Expo Freight CC."/>
+  <meta name="keywords" content="customs coordinator, logistics coordinator, freight forwarding, import export, SARS compliance, Gauteng, South Africa, supply chain"/>
+  <link rel="canonical" href="https://itsnotalwin.github.io/"/>
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Alwin Newman — Customs & Logistics Coordinator"/>
+  <meta property="og:description" content="Operations-focused logistics professional based in Gauteng. Import/export coordination, customs documentation, freight operations."/>
+  <meta property="og:type" content="website"/>
+  <meta name="robots" content="index, follow"/>
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1rem 3rem;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.4s, background 0.4s;
-  }
-  nav.scrolled { background: rgba(8,8,8,0.95); border-color: var(--line); }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.2em; color: var(--white); text-decoration: none; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: var(--grey); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--white); }
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#080808" media="(prefers-color-scheme: dark)"/>
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Alwin Newman"/>
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png"/>
 
-  /* HERO */
-  #hero {
-    height: 100vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 3rem 3.5rem;
-    position: relative;
-    overflow: hidden;
+  <!-- Performance: Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alwin Newman",
+    "jobTitle": "Customs & Logistics Coordinator",
+    "worksFor": { "@type": "Organization", "name": "Expo Freight CC" },
+    "address": { "@type": "PostalAddress", "addressRegion": "Gauteng", "addressCountry": "ZA" },
+    "email": "alwin.newman97@gmail.com",
+    "telephone": "+27-73-095-8363",
+    "url": "https://itsnotalwin.github.io",
+    "sameAs": [
+      "https://linkedin.com/in/alwinnewman",
+      "https://github.com/itsnotalwin"
+    ],
+    "skills": ["Customs Documentation", "SARS Compliance", "Import/Export Coordination", "JavaScript", "Python", "React", "Supply Chain Management"]
   }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 80% 20%, #1a1a1a 0%, var(--black) 60%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.4;
-    mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
-  }
-  .hero-label {
-    font-size: 0.65rem; letter-spacing: 0.3em; color: var(--grey);
-    text-transform: uppercase; margin-bottom: 1rem;
-    position: relative;
-    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
-  }
-  .hero-label::before { content: '— '; }
-  .hero-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4.5rem, 12vw, 12rem);
-    line-height: 0.9;
-    letter-spacing: -0.01em;
-    position: relative;
-    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
-  }
-  .hero-name span { display: block; }
-  .hero-title {
-    margin-top: 1.2rem;
-    font-size: 0.75rem; letter-spacing: 0.25em; color: var(--grey);
-    text-transform: uppercase; position: relative;
-    opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
-  }
-  .hero-scroll {
-    position: absolute; right: 3rem; bottom: 3.5rem;
-    writing-mode: vertical-rl;
-    font-size: 0.6rem; letter-spacing: 0.2em; color: var(--dim);
-    text-transform: uppercase;
-    opacity: 0; animation: fadeIn 1s 1.2s forwards;
-  }
-  .hero-scroll::after {
-    content: '';
-    display: block; width: 1px; height: 50px;
-    background: var(--dim); margin: 0.8rem auto 0;
-    animation: lineGrow 1s 1.5s both;
-    transform-origin: top;
-  }
-  @keyframes lineGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </script>
 
-  /* SECTIONS */
-  section { padding: 5rem 3rem; border-top: 1px solid var(--line); }
-  .section-header {
-    display: flex; align-items: baseline; gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-  .section-num { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.2em; }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 4vw, 4rem);
-    letter-spacing: 0.05em;
-  }
-  .section-line { flex: 1; height: 1px; background: var(--line); }
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      color-scheme: dark light;
+      --black: #080808;
+      --white: #f0f0f0;
+      --grey: #aaa;
+      --grey-muted: #777;
+      --dim: #2e2e2e;
+      --line: #1a1a1a;
+      --accent: #3a3;
+      --accent-glow: rgba(50,170,50,0.5);
+      --success: #4caf50;
+      
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 3.5rem;
+      --space-xl: 5.5rem;
+      --space-xxl: 7rem;
+      
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.4s ease;
+      --transition-slow: 0.75s ease;
+      --transition-theme: 0.3s ease;
+    }
 
-  /* ABOUT */
-  #about .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-    align-items: start;
-  }
-  .about-text { font-size: 0.9rem; line-height: 1.85; color: #bbb; }
-  .about-text em { color: var(--white); font-style: normal; }
-  .about-details { display: flex; flex-direction: column; gap: 1.4rem; }
-  .detail-item { border-left: 1px solid var(--dim); padding-left: 1.2rem; }
-  .detail-label { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--grey); text-transform: uppercase; margin-bottom: 0.3rem; }
-  .detail-value { font-size: 0.82rem; color: var(--white); }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    
+    /* Light Mode Overrides */
+    [data-theme="light"] {
+      --black: #fafafa; --white: #111111; --grey: #555; --grey-muted: #666;
+      --dim: #cccccc; --line: #e0e0e0; --accent: #2a8a2a; --accent-glow: rgba(42,138,42,0.3);
+    }
+    [data-theme="light"] .hero-bg { background: radial-gradient(ellipse at 75% 25%, #e8e8e8 0%, #fafafa 65%); }
+    [data-theme="light"] nav.scrolled { background: rgba(250,250,250,0.96); }
+    [data-theme="light"] .exp-item::before { background: rgba(0,0,0,0.03); }
+    [data-theme="light"] .skill-group:hover, [data-theme="light"] .repo-card:hover { background: rgba(0,0,0,0.02); }
+    [data-theme="light"] .contact-cta span:first-child, [data-theme="light"] .contact-cta span:nth-child(2) { color: #aaa; }
+    [data-theme="light"] .copy-success { background: #e8f5e9; color: #2e7d32; }
+    [data-theme="light"] input, [data-theme="light"] textarea { background: #fff !important; border-color: #ccc !important; color: #111 !important; }
 
-  /* EXPERIENCE */
-  #experience .exp-list { display: flex; flex-direction: column; gap: 0; }
-  .exp-item {
-    display: grid; grid-template-columns: 160px 1fr;
-    gap: 2.5rem; padding: 2rem 0;
-    border-bottom: 1px solid var(--line);
-    transition: background 0.2s;
-  }
-  .exp-item:first-child { border-top: 1px solid var(--line); }
-  .exp-period { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--grey); text-transform: uppercase; margin-bottom: 0.4rem; }
-  .exp-company { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.1em; color: var(--white); }
-  .exp-role { font-size: 0.65rem; color: var(--grey); margin-top: 0.25rem; letter-spacing: 0.1em; text-transform: uppercase; }
-  .exp-desc { font-size: 0.78rem; line-height: 1.8; color: #999; margin-bottom: 0.9rem; }
-  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
-  .exp-points li { font-size: 0.74rem; color: #777; padding-left: 1.2rem; position: relative; line-height: 1.65; }
-  .exp-points li::before { content: '↳'; position: absolute; left: 0; color: var(--dim); }
+    /* Theme Transition Targets */
+    body, nav, section, .skill-group, .repo-card, .exp-item, .detail-item, 
+    .avail-block, footer, .hero-bg, .contact-cta span, input, textarea {
+      transition: background-color var(--transition-theme), color var(--transition-theme), 
+                  border-color var(--transition-theme), box-shadow var(--transition-theme);
+    }
 
-  /* SKILLS */
-  #skills .skills-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-  }
-  .skill-group { padding: 1.8rem 2rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .skill-group:nth-child(3n) { border-right: none; }
-  .skill-group:nth-last-child(-n+3) { border-bottom: none; }
-  .skill-group-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.9rem; }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .skill-tag { font-size: 0.65rem; padding: 0.28rem 0.65rem; border: 1px solid var(--dim); color: #aaa; letter-spacing: 0.05em; transition: all 0.2s; }
-  .skill-tag:hover { border-color: var(--white); color: var(--white); }
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: var(--black); color: var(--white); font-family: var(--font-mono);
+      font-weight: 300; cursor: crosshair; overflow-x: hidden; line-height: 1.6;
+    }
+    
+    .skip-link {
+      position: absolute; top: -40px; left: 0; background: var(--white); color: var(--black);
+      padding: var(--space-xs) var(--space-sm); z-index: 10000; text-decoration: none;
+      font-size: 0.9rem; font-weight: 400; transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: 0; outline: 2px solid var(--black); outline-offset: 2px; }
 
-  /* EDUCATION */
-  #education .edu-list { display: flex; flex-direction: column; gap: 0; }
-  .edu-item {
-    display: grid; grid-template-columns: 160px 1fr;
-    gap: 2.5rem; padding: 1.8rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .edu-item:first-child { border-top: 1px solid var(--line); }
-  .edu-year { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--grey); text-transform: uppercase; }
-  .edu-degree { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
-  .edu-inst { font-size: 0.72rem; color: var(--grey); letter-spacing: 0.1em; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, 
+    .skill-tag:focus-visible, .print-btn:focus-visible, .contact-link:focus-visible, .theme-btn:focus-visible {
+      outline: 2px solid var(--white); outline-offset: 2px;
+    }
 
-  /* CONTACT */
-  #contact { padding-bottom: 6rem; }
-  #contact .contact-inner { display: flex; justify-content: space-between; align-items: flex-end; }
-  .contact-cta { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 6vw, 6rem); line-height: 1; letter-spacing: 0.03em; color: var(--white); }
-  .contact-cta span { display: block; color: var(--dim); }
-  .contact-links { display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-end; }
-  .contact-link { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--grey); text-decoration: none; text-transform: uppercase; transition: color 0.2s; display: flex; align-items: center; gap: 0.7rem; }
-  .contact-link:hover { color: var(--white); }
-  .contact-link::after { content: '↗'; font-size: 0.8rem; }
+    /* ===== PROGRESS BAR ===== */
+    #progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 102; transition: width 0.1s; }
 
-  /* FOOTER */
-  footer {
-    padding: 1.5rem 3rem;
-    border-top: 1px solid var(--line);
-    display: flex; justify-content: space-between;
-    font-size: 0.6rem; color: var(--dim); letter-spacing: 0.15em; text-transform: uppercase;
-  }
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--space-sm) var(--space-lg); border-bottom: 1px solid transparent;
+      transition: border-color var(--transition-normal), background var(--transition-normal);
+    }
+    nav.scrolled { background: rgba(8,8,8,0.96); border-color: var(--line); backdrop-filter: blur(12px); }
+    
+    .nav-left { display: flex; align-items: center; gap: var(--space-md); }
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.2em;
+      color: var(--white); text-decoration: none; padding-right: var(--space-md);
+      border-right: 1px solid var(--dim); min-height: 44px; display: inline-flex; align-items: center;
+    }
+    
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: var(--space-xs); min-height: 44px; min-width: 44px;
+      align-items: center; justify-content: center;
+    }
+    .hamburger {
+      display: block; width: 20px; height: 2px; background: var(--white);
+      position: relative; transition: background var(--transition-fast);
+    }
+    .hamburger::before, .hamburger::after {
+      content: ''; position: absolute; left: 0; width: 20px; height: 2px;
+      background: var(--white); transition: transform var(--transition-fast);
+    }
+    .hamburger::before { top: -6px; }
+    .hamburger::after { top: 6px; }
+    .nav-toggle[aria-expanded="true"] .hamburger { background: transparent; }
+    .nav-toggle[aria-expanded="true"] .hamburger::before { transform: rotate(45deg); top: 0; }
+    .nav-toggle[aria-expanded="true"] .hamburger::after { transform: rotate(-45deg); top: 0; }
+    
+    .nav-links { display: flex; gap: var(--space-sm); list-style: none; }
+    .nav-links a {
+      color: var(--grey-muted); text-decoration: none; font-size: 0.62rem;
+      letter-spacing: 0.15em; text-transform: uppercase; transition: color var(--transition-fast);
+      position: relative; min-height: 44px; display: inline-flex; align-items: center; padding: 0 var(--space-xs);
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: -3px;
+      width: 0; height: 1px; background: var(--white); transition: width var(--transition-fast);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    
+    .nav-right { display: flex; align-items: center; gap: var(--space-sm); }
+    .nav-status { display: flex; align-items: center; gap: 0.6rem; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-muted); }
+    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+    
+    .system-clock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.1rem; font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); }
+    #clock-time { color: var(--grey); font-size: 0.6rem; }
+    
+    .print-btn {
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--grey-muted); border: 1px solid var(--dim); padding: 0.35rem 0.9rem;
+      background: transparent; cursor: pointer; text-decoration: none;
+      transition: color var(--transition-fast), border-color var(--transition-fast);
+      min-height: 44px; display: inline-flex; align-items: center;
+    }
+    .print-btn:hover { color: var(--white); border-color: var(--grey); }
 
-  /* SCROLL REVEAL */
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
+    .theme-btn {
+      background: none; border: 1px solid var(--dim); border-radius: 50%;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--grey-muted); transition: all var(--transition-fast);
+      position: relative; overflow: hidden;
+    }
+    .theme-btn:hover { color: var(--white); border-color: var(--grey); }
+    .theme-btn svg { position: absolute; transition: transform 0.3s ease, opacity 0.3s ease; }
+    [data-theme="dark"] .icon-sun, [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(-20deg); }
+    [data-theme="light"] .icon-sun, [data-theme="dark"] .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
 
-  @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-    #about .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    #skills .skills-grid { grid-template-columns: 1fr 1fr; }
-    #contact .contact-inner { flex-direction: column; align-items: flex-start; gap: 3rem; }
-    .hero-scroll { display: none; }
-  }
-</style>
+    /* ===== HERO ===== */
+    #hero {
+      height: 100vh;
+      height: 100svh;
+      min-height: 580px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 var(--space-lg) var(--space-md); position: relative; overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 25%, #131313 0%, var(--black) 65%); }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 55px 55px; opacity: 0.5;
+      mask-image: radial-gradient(ellipse at 60% 40%, black 10%, transparent 75%);
+    }
+    .hero-label {
+      font-size: 0.62rem; letter-spacing: 0.3em; color: var(--grey-muted); text-transform: uppercase;
+      margin-bottom: var(--space-sm); position: relative; opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-label::before { content: '— '; color: var(--dim); }
+    .hero-name {
+      font-family: var(--font-display); font-size: clamp(5rem, 13vw, 13rem); line-height: 0.88;
+      letter-spacing: -0.01em; position: relative; opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+      min-height: 12rem;
+    }
+    .hero-name span { display: block; }
+    .hero-rule { width: 60px; height: 1px; background: var(--dim); margin: 1.4rem 0 1.1rem; opacity: 0; animation: fadeIn 0.8s 0.65s forwards; }
+    .hero-sub { font-size: 0.68rem; letter-spacing: 0.18em; color: #bbb; text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+    .hero-sub .sep { color: var(--dim); margin: 0 0.6rem; }
+    .hero-meta { margin-top: 0.5rem; font-size: 0.58rem; letter-spacing: 0.22em; color: var(--dim); text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s 0.85s forwards; }
+    
+    .hero-scroll { position: absolute; right: var(--space-lg); bottom: var(--space-md); writing-mode: vertical-rl; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--dim); text-transform: uppercase; opacity: 0; animation: fadeIn 1s 1.2s forwards; }
+    .hero-scroll::after { content: ''; display: block; width: 1px; height: 50px; background: var(--dim); margin: 0.8rem auto 0; animation: lineGrow 1s 1.5s both; transform-origin: top; }
+    @keyframes lineGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ===== SECTIONS ===== */
+    section { padding: var(--space-xl) var(--space-lg); border-top: 1px solid var(--line); position: relative; }
+    .section-header { display: flex; align-items: baseline; gap: var(--space-sm); margin-bottom: var(--space-md); }
+    .section-num { font-size: 0.55rem; color: var(--dim); letter-spacing: 0.2em; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 4rem); letter-spacing: 0.05em; }
+    .section-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* ===== ABOUT ===== */
+    #about .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); align-items: start; }
+    .about-text { font-size: 1rem; line-height: 2.1; color: #c8c8c8; }
+    .about-text em { color: var(--white); font-style: normal; }
+    .about-details { display: flex; flex-direction: column; gap: var(--space-md); }
+    .detail-item { border-left: 1px solid #444; padding-left: var(--space-sm); }
+    .detail-label { font-size: 0.68rem; letter-spacing: 0.18em; color: var(--grey-muted); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .detail-value { font-size: 0.9rem; color: var(--white); line-height: 1.7; }
+    .detail-value a { color: var(--white); text-decoration: none; border-bottom: 1px dashed var(--dim); }
+    .detail-value a:hover { border-bottom-style: solid; }
+
+    /* ===== EXPERIENCE ===== */
+    .exp-item { display: grid; grid-template-columns: 165px 1fr; gap: var(--space-md); padding: var(--space-md) 0; border-bottom: 1px solid var(--line); position: relative; }
+    .exp-item:first-child { border-top: 1px solid var(--line); }
+    .exp-item::before { content: ''; position: absolute; left: calc(-1 * var(--space-lg)); right: calc(-1 * var(--space-lg)); top: 0; bottom: 0; background: rgba(255,255,255,0.012); opacity: 0; transition: opacity var(--transition-fast); pointer-events: none; }
+    .exp-item:hover::before { opacity: 1; }
+    .exp-period { font-size: 0.72rem; letter-spacing: 0.12em; color: var(--grey-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .exp-company { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.1em; }
+    .exp-role { font-size: 0.72rem; color: var(--grey-muted); margin-top: 0.35rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .exp-desc { font-size: 0.92rem; line-height: 1.9; color: #bbb; margin-bottom: 1.1rem; }
+    .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .exp-points li { font-size: 0.88rem; color: #aaa; padding-left: 1.4rem; position: relative; line-height: 1.8; }
+    .exp-points li::before { content: '↳'; position: absolute; left: 0; color: #555; }
+
+    /* ===== SKILLS ===== */
+    #skills .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .skill-group { padding: var(--space-md); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background var(--transition-fast); }
+    .skill-group:hover { background: rgba(255,255,255,0.013); }
+    .skill-group:nth-child(3n) { border-right: none; }
+    .skill-group:nth-last-child(-n+3) { border-bottom: none; }
+    .skill-group-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-muted); margin-bottom: var(--space-sm); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { font-size: 0.75rem; padding: 0.35rem 0.8rem; border: 1px solid #3a3a3a; color: #bbb; letter-spacing: 0.03em; transition: all var(--transition-fast); cursor: default; min-height: 44px; display: inline-flex; align-items: center; }
+    .skill-tag:hover, .skill-tag:focus { border-color: var(--grey); color: var(--white); background: rgba(255,255,255,0.04); }
+
+    /* ===== REPOS ===== */
+    #repos .repo-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
+    .repo-card { padding: var(--space-md); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background var(--transition-fast); text-decoration: none; color: inherit; display: block; min-height: 44px; }
+    .repo-card:nth-child(2n) { border-right: none; }
+    .repo-card:nth-last-child(-n+2) { border-bottom: none; }
+    .repo-card:hover { background: rgba(255,255,255,0.013); }
+    .repo-status { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: #666; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+    .repo-status-dot { width: 5px; height: 5px; border-radius: 50%; background: #555; }
+    .repo-status.wip .repo-status-dot { background: #996; box-shadow: 0 0 5px rgba(153,153,102,0.4); }
+    .repo-name { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+    .repo-desc { font-size: 0.88rem; line-height: 1.85; color: #aaa; margin-bottom: 1.1rem; }
+    .repo-link { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; transition: color var(--transition-fast); }
+    .repo-card:hover .repo-link { color: #999; }
+
+    /* ===== EDUCATION ===== */
+    .edu-item { display: grid; grid-template-columns: 165px 1fr; gap: var(--space-md); padding: var(--space-sm) 0; border-bottom: 1px solid var(--line); }
+    .edu-item:first-child { border-top: 1px solid var(--line); }
+    .edu-year { font-size: 0.72rem; letter-spacing: 0.12em; color: var(--grey-muted); text-transform: uppercase; padding-top: 0.15rem; }
+    .edu-degree { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+    .edu-inst { font-size: 0.82rem; color: var(--grey-muted); letter-spacing: 0.08em; }
+
+    /* ===== AVAILABILITY ===== */
+    #availability .avail-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+    .avail-block { padding: var(--space-md); border-right: 1px solid var(--line); }
+    .avail-block:last-child { border-right: none; }
+    .avail-block-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey-muted); margin-bottom: var(--space-sm); }
+    .avail-roles { display: flex; flex-direction: column; gap: 0.85rem; }
+    .avail-role { font-size: 0.92rem; color: #ccc; padding-left: 1.2rem; position: relative; line-height: 1.6; }
+    .avail-role::before { content: '→'; position: absolute; left: 0; color: #555; font-size: 0.8rem; }
+    .avail-meta { display: flex; flex-direction: column; gap: var(--space-sm); }
+    .avail-row-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: #666; margin-bottom: 0.3rem; }
+    .avail-row-value { font-size: 0.92rem; color: #ccc; }
+    .avail-status-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 5px var(--accent-glow); animation: pulse 2.5s ease-in-out infinite; margin-right: 0.5rem; vertical-align: middle; }
+
+    /* ===== CONTACT ===== */
+    #contact { padding-bottom: var(--space-xxl); }
+    .contact-inner { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-md); }
+    .contact-cta { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 6.5rem); line-height: 0.95; letter-spacing: 0.02em; }
+    .contact-cta span { display: block; color: #444; }
+    .contact-cta span:last-child { color: var(--white); }
+    .contact-links { display: flex; flex-direction: column; gap: var(--space-xs); align-items: flex-end; }
+    .contact-link { font-size: 0.82rem; letter-spacing: 0.12em; color: #888; text-decoration: none; text-transform: uppercase; transition: color var(--transition-fast); display: flex; align-items: center; gap: 0.6rem; min-height: 44px; cursor: pointer; }
+    .contact-link:hover { color: var(--white); }
+    .contact-link::after { content: '↗'; font-size: 0.9rem; }
+    .copy-success { background: rgba(50,170,50,0.15); color: var(--success); border-radius: 4px; padding: 0.2rem 0.4rem; transition: all 0.3s ease; }
+    
+    .contact-form { width: 100%; max-width: 500px; margin-top: 2rem; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; background: transparent; border: 1px solid var(--dim); padding: 0.8rem;
+      color: var(--white); font-family: var(--font-mono); font-size: 0.9rem;
+      transition: border-color var(--transition-fast); margin-bottom: 1rem;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--white); }
+    .contact-form button { width: fit-content; }
+
+    /* ===== FOOTER ===== */
+    footer { padding: var(--space-sm) var(--space-lg); border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 0.65rem; color: #555; letter-spacing: 0.15em; text-transform: uppercase; flex-wrap: wrap; gap: 1rem; }
+
+    /* ===== REVEAL ===== */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity var(--transition-slow), transform var(--transition-slow); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ===== ACCESSIBILITY: REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+      .hero-scroll { display: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      nav, #progress-bar, .hero-scroll, .contact-links a::after, .skill-tag:hover, .nav-toggle, .skip-link, .hero-bg, .hero-grid, .theme-btn, .contact-form { display: none !important; }
+      body { background: #fff; color: #000; font-size: 11pt; line-height: 1.5; }
+      section { padding: 1rem 0; border: none; page-break-inside: avoid; }
+      a { color: #000; text-decoration: underline; }
+      .exp-points li::before { content: "•"; }
+      .hero-name { font-size: 3rem; min-height: auto; line-height: 1; }
+      .contact-cta { font-size: 2rem; }
+      #hero { height: auto; padding: 2rem 0; }
+      .hero-label, .hero-sub, .hero-meta { color: #000 !important; }
+      .about-grid, .exp-item, .edu-item, .avail-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: var(--space-sm) var(--space-md); }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 60px; right: -100%; flex-direction: column; background: var(--black);
+        padding: var(--space-md); width: 80%; max-width: 280px; border-left: 1px solid var(--line);
+        transition: right var(--transition-normal); z-index: 99; box-shadow: -5px 0 20px rgba(0,0,0,0.6);
+        height: calc(100vh - 60px); overflow-y: auto;
+      }
+      .nav-links.active { right: 0; }
+      .nav-links a { padding: 0.75rem 0; min-height: 48px; font-size: 0.82rem; letter-spacing: 0.12em; border-bottom: 1px solid var(--line); display: flex; align-items: center; }
+      .nav-links a::after { display: none; }
+      .nav-links li:last-child a { border-bottom: none; }
+      .system-clock { display: none; }
+      .nav-logo { border-right: none; padding-right: 0; }
+      .nav-right { gap: 0.6rem; }
+      .print-btn { font-size: 0.52rem; padding: 0.3rem 0.6rem; letter-spacing: 0.1em; }
+
+      /* Hero — true viewport fill, accounts for browser chrome */
+      #hero {
+        height: 100vh;
+        height: 100svh;
+        min-height: 500px;
+        padding: 0 var(--space-md);
+        padding-bottom: max(2.5rem, env(safe-area-inset-bottom, 2.5rem));
+      }
+      .hero-name {
+        min-height: auto;
+        font-size: clamp(3.5rem, 14vw, 7rem);
+        line-height: 0.88;
+      }
+      .hero-label { font-size: 0.52rem; letter-spacing: 0.2em; margin-bottom: 0.7rem; }
+      .hero-rule { margin: 0.9rem 0 0.7rem; width: 40px; }
+      .hero-sub { font-size: 0.56rem; letter-spacing: 0.08em; }
+      .hero-sub .sep { margin: 0 0.25rem; }
+      .hero-meta { font-size: 0.48rem; letter-spacing: 0.15em; }
+      .hero-scroll { display: none; }
+
+      /* Sections */
+      section { padding: 3rem var(--space-md); }
+      .section-header { margin-bottom: 1.8rem; gap: 0.8rem; }
+      .section-title { font-size: clamp(1.8rem, 7vw, 3rem); }
+
+      /* About */
+      #about .about-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+      .about-text { font-size: 0.88rem; line-height: 1.85; }
+      .detail-value { font-size: 0.85rem; }
+
+      /* Experience */
+      .exp-item { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.8rem 0; }
+      .exp-item::before { left: calc(-1 * var(--space-md)); right: calc(-1 * var(--space-md)); }
+      .exp-desc { font-size: 0.83rem; }
+      .exp-points li { font-size: 0.8rem; }
+
+      /* Skills — 2 col */
+      #skills .skills-grid { grid-template-columns: 1fr 1fr; }
+      .skill-group { padding: 1.1rem; }
+      .skill-group:nth-child(3n)        { border-right: 1px solid var(--line); }
+      .skill-group:nth-child(2n)        { border-right: none; }
+      .skill-group:nth-last-child(-n+3) { border-bottom: 1px solid var(--line); }
+      .skill-group:nth-last-child(-n+2) { border-bottom: none; }
+      .skill-group:last-child           { border-bottom: none; }
+      .skill-tag { font-size: 0.68rem; padding: 0.22rem 0.55rem; min-height: 32px; }
+
+      /* Repos */
+      #repos .repo-grid { grid-template-columns: 1fr; }
+      .repo-card { padding: 1.4rem; }
+      .repo-card:nth-child(2n)         { border-right: none; }
+      .repo-card:nth-last-child(-n+2)  { border-bottom: 1px solid var(--line); }
+      .repo-card:last-child            { border-bottom: none; }
+
+      /* Education */
+      .edu-item { grid-template-columns: 1fr; gap: 0.25rem; padding: 1.2rem 0; }
+
+      /* Availability */
+      #availability .avail-grid { grid-template-columns: 1fr; }
+      .avail-block { border-right: none; border-bottom: 1px solid var(--line); padding: 1.5rem 0; }
+      .avail-block:last-child { border-bottom: none; }
+      .avail-role { font-size: 0.85rem; }
+      .avail-row-value { font-size: 0.85rem; }
+
+      /* Contact */
+      .contact-inner { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
+      .contact-links { align-items: flex-start; }
+      .contact-link { font-size: 0.72rem; min-height: 40px; }
+      /* Prevent iOS auto-zoom on input focus */
+      .contact-form input,
+      .contact-form textarea { font-size: 16px !important; }
+
+      footer { padding: var(--space-sm) var(--space-md); flex-direction: column; gap: 0.3rem; }
+    }
+
+    /* Small phones — 390px and below */
+    @media (max-width: 390px) {
+      .hero-name { font-size: clamp(3rem, 16vw, 5rem); }
+      #skills .skills-grid { grid-template-columns: 1fr; }
+      .skill-group { border-right: none !important; }
+      .skill-group:nth-last-child(-n+2) { border-bottom: 1px solid var(--line) !important; }
+      .skill-group:last-child { border-bottom: none !important; }
+      /* On tiny screens, hide LinkedIn button to save space */
+      .nav-right a.print-btn:first-of-type { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">AN</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav id="navbar" aria-label="Primary navigation">
+  <div class="nav-left">
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span class="hamburger"></span>
+    </button>
+    <a href="#hero" class="nav-logo">AN</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#repos">Repos</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#availability">Availability</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <div class="system-clock">
+      <span>JHB / UTC+2</span>
+      <span id="clock-time" aria-label="Current time in Johannesburg">00:00:00</span>
+    </div>
+    <div class="nav-status" role="status" aria-live="polite">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>Available</span>
+    </div>
+    <button id="theme-toggle" class="theme-btn" aria-label="Switch to light mode">
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
+    <a href="https://www.linkedin.com/in/alwinnewman/" target="_blank" rel="noopener noreferrer" class="print-btn">LinkedIn</a>
+    <a href="print.html" target="_blank" class="print-btn">↓ CV</a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+<div id="progress-bar" aria-hidden="true"></div>
+
+<!-- HERO — Download CV button removed -->
+<section id="hero" aria-label="Introduction">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
   <p class="hero-label">Customs &amp; Logistics Coordinator</p>
   <h1 class="hero-name">
     <span>Alwin</span>
     <span>Newman</span>
   </h1>
-  <p class="hero-title">Gauteng, South Africa &nbsp;·&nbsp; Operations &nbsp;·&nbsp; Logistics &nbsp;·&nbsp; Builder</p>
-  <p class="hero-scroll">Scroll</p>
+  <div class="hero-rule" aria-hidden="true"></div>
+  <p class="hero-sub">
+    Expo Freight CC
+    <span class="sep" aria-hidden="true">·</span>
+    2023 – Present
+    <span class="sep" aria-hidden="true">·</span>
+    Gauteng, South Africa
+  </p>
+  <p class="hero-meta">Operations &nbsp;·&nbsp; Logistics &nbsp;·&nbsp; Builder</p>
+  <p class="hero-scroll" aria-hidden="true">Scroll</p>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-header reveal">
-    <span class="section-num">01</span>
-    <h2 class="section-title">About</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="about-grid reveal">
-    <p class="about-text">
-      Operations-focused logistics professional with hands-on experience coordinating <em>import and export shipments</em>, customs documentation, freight movements, and warehouse workflows in fast-paced environments.<br/><br/>
-      Beyond logistics, I build — turning operational problems into <em>automated, elegant solutions</em>. Whether it's streamlining a workflow or shipping a project, I focus on <em>accuracy, efficiency, and clean execution</em>.
-    </p>
-    <div class="about-details">
-      <div class="detail-item">
-        <div class="detail-label">Current Role</div>
-        <div class="detail-value">Customs &amp; Logistics Coordinator<br/>Expo Freight CC · 2023 – Present</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Location</div>
-        <div class="detail-value">Gauteng, South Africa</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Languages</div>
-        <div class="detail-value">English (Fluent) · Afrikaans (Fluent)</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">GitHub</div>
-        <div class="detail-value">github.com/itsnotalwin</div>
+<main id="main">
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line" aria-hidden="true"></div>
+    </div>
+    <div class="about-grid reveal">
+      <p class="about-text">
+        Operations-focused logistics professional with hands-on experience coordinating
+        <em>import and export shipments</em>, customs documentation, freight movements,
+        and warehouse workflows in fast-paced environments.<br/><br/>
+        Alongside logistics, I build — designing lightweight tools and interfaces that
+        reduce operational friction and improve visibility. I'm drawn to the overlap between
+        <em>process thinking and code</em> — where a well-designed system does the heavy lifting.
+      </p>
+      <div class="about-details">
+        <div class="detail-item">
+          <div class="detail-label">Current Role</div>
+          <div class="detail-value">Customs &amp; Logistics Coordinator<br/>Expo Freight CC · 2023 – Present</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Location</div>
+          <div class="detail-value">Gauteng, South Africa</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Languages</div>
+          <div class="detail-value">English (Fluent) · Afrikaans (Fluent)</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Contact</div>
+          <div class="detail-value">
+            <a href="mailto:alwin.newman97@gmail.com">alwin.newman97@gmail.com</a>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">LinkedIn</div>
+          <div class="detail-value">
+            <a href="https://www.linkedin.com/in/alwinnewman/" target="_blank" rel="noopener noreferrer">linkedin.com/in/alwinnewman</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-header reveal">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Experience</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="exp-list">
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-period">2023 – Present</div>
-        <div class="exp-company">Expo Freight CC</div>
-        <div class="exp-role">Customs &amp; Logistics Coordinator</div>
-      </div>
-      <div class="exp-content">
-        <p class="exp-desc">Lead daily import/export shipment workflows end-to-end, from customs documentation through to delivery. Primary liaison between transporters, warehouses, and clients.</p>
-        <ul class="exp-points">
-          <li>Coordinate daily import and export shipment workflows including customs documentation, cargo tracking, and delivery scheduling</li>
-          <li>Prepare and process shipping, invoicing, and customs documentation ensuring SARS compliance</li>
-          <li>Monitor cross-border shipments and resolve delays, discrepancies, and operational escalations</li>
-          <li>Generate Excel-based operational reports and maintain accurate shipment and workflow records</li>
-          <li>Support warehouse coordination through stock movement tracking and dispatch workflow management</li>
-          <li>Assist with team supervision and workflow allocation during high-volume periods</li>
-        </ul>
-      </div>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line" aria-hidden="true"></div>
     </div>
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-period">2017 – 2019</div>
-        <div class="exp-company">Likeshou China</div>
-        <div class="exp-role">English Language Instructor</div>
-      </div>
-      <div class="exp-content">
-        <p class="exp-desc">Planned and delivered structured English lessons across varying proficiency levels in a fast-paced international environment.</p>
-        <ul class="exp-points">
-          <li>Adapted teaching methods and communication styles to improve engagement and individual learning outcomes</li>
-          <li>Managed classroom coordination, lesson preparation, and student progress assessment</li>
-          <li>Provided one-on-one mentorship supporting student confidence and exam preparation</li>
-          <li>Developed strong cross-cultural communication and presentation skills</li>
-        </ul>
-      </div>
+    <div class="exp-list">
+      <article class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">2023 – Present</div>
+          <div class="exp-company">Expo Freight CC</div>
+          <div class="exp-role">Customs &amp; Logistics Coordinator</div>
+        </div>
+        <div class="exp-content">
+          <p class="exp-desc">End-to-end coordination of import and export shipment workflows. Primary liaison between transporters, warehouses, and clients across cross-border operations.</p>
+          <ul class="exp-points">
+            <li>Coordinate daily import and export workflows including customs documentation, cargo tracking, and delivery scheduling</li>
+            <li>Prepare and process shipping, invoicing, and customs documentation ensuring SARS compliance</li>
+            <li>Monitor cross-border shipments and resolve delays, discrepancies, and operational escalations</li>
+            <li>Generate Excel-based operational reports and maintain accurate shipment and workflow records</li>
+            <li>Support warehouse coordination through stock movement tracking and dispatch workflow management</li>
+            <li>Assist with team supervision and workflow allocation during high-volume periods</li>
+          </ul>
+        </div>
+      </article>
+      <article class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">2017 – 2019</div>
+          <div class="exp-company">Likeshou China</div>
+          <div class="exp-role">English Language Instructor</div>
+        </div>
+        <div class="exp-content">
+          <p class="exp-desc">Planned and delivered structured English lessons across varying proficiency levels in a fast-paced international classroom environment.</p>
+          <ul class="exp-points">
+            <li>Adapted teaching methods to improve engagement and individual learning outcomes</li>
+            <li>Managed classroom coordination, lesson preparation, and student progress assessment</li>
+            <li>Provided one-on-one mentorship supporting student confidence and exam preparation</li>
+            <li>Built strong cross-cultural communication and presentation skills</li>
+          </ul>
+        </div>
+      </article>
+      <article class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-period">Ongoing</div>
+          <div class="exp-company">Freelance</div>
+          <div class="exp-role">Photography</div>
+        </div>
+        <div class="exp-content">
+          <p class="exp-desc">Independent photography practice covering the full project lifecycle — client briefing through to post-production and delivery.</p>
+          <ul class="exp-points">
+            <li>Manage client communication, shoot coordination, and scheduling independently</li>
+            <li>Handle post-production editing workflows and final content delivery</li>
+          </ul>
+        </div>
+      </article>
     </div>
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-period">Ongoing</div>
-        <div class="exp-company">Freelance</div>
-        <div class="exp-role">Photography</div>
-      </div>
-      <div class="exp-content">
-        <p class="exp-desc">Independent photography practice spanning client communication, shoot coordination, post-production, and content delivery.</p>
-        <ul class="exp-points">
-          <li>Manage full project lifecycle from brief to final delivery independently</li>
-          <li>Handle scheduling, client requirements, and post-production workflows</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-header reveal">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Skills</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="skills-grid reveal">
-    <div class="skill-group">
-      <div class="skill-group-label">Logistics &amp; Customs</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Import &amp; Export</span>
-        <span class="skill-tag">Customs Documentation</span>
-        <span class="skill-tag">SARS Compliance</span>
-        <span class="skill-tag">Road Freight</span>
-        <span class="skill-tag">Cargo Tracking</span>
-        <span class="skill-tag">Shipment Coordination</span>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line" aria-hidden="true"></div>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-label">Logistics &amp; Customs</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Import &amp; Export</span>
+          <span class="skill-tag">Customs Documentation</span>
+          <span class="skill-tag">SARS Compliance</span>
+          <span class="skill-tag">Road Freight</span>
+          <span class="skill-tag">Cargo Tracking</span>
+          <span class="skill-tag">Shipment Coordination</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Operations</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Warehouse Coordination</span>
+          <span class="skill-tag">Invoice Processing</span>
+          <span class="skill-tag">Workflow Optimization</span>
+          <span class="skill-tag">Team Coordination</span>
+          <span class="skill-tag">Operational Problem Solving</span>
+          <span class="skill-tag">Dispatch Management</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Technical</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel Reporting</span>
+          <span class="skill-tag">Cross-border Logistics</span>
+          <span class="skill-tag">Documentation</span>
+          <span class="skill-tag">Data Accuracy</span>
+          <span class="skill-tag">Client Communication</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Code</div>
+        <div class="skill-tags">
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Linux</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Communication</div>
+        <div class="skill-tags">
+          <span class="skill-tag">English (Fluent)</span>
+          <span class="skill-tag">Afrikaans (Fluent)</span>
+          <span class="skill-tag">Cross-cultural</span>
+          <span class="skill-tag">Stakeholder Liaison</span>
+          <span class="skill-tag">Presentation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Creative</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Photography</span>
+          <span class="skill-tag">Photo Editing</span>
+          <span class="skill-tag">Visual Composition</span>
+          <span class="skill-tag">Content Delivery</span>
+        </div>
       </div>
     </div>
-    <div class="skill-group">
-      <div class="skill-group-label">Operations</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Warehouse Coordination</span>
-        <span class="skill-tag">Invoice Processing</span>
-        <span class="skill-tag">Workflow Optimization</span>
-        <span class="skill-tag">Team Coordination</span>
-        <span class="skill-tag">Operational Problem Solving</span>
-        <span class="skill-tag">Dispatch Management</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-label">Technical</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Excel Reporting</span>
-        <span class="skill-tag">Client Communication</span>
-        <span class="skill-tag">Cross-border Logistics</span>
-        <span class="skill-tag">Documentation</span>
-        <span class="skill-tag">Data Accuracy</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-label">Code</div>
-      <div class="skill-tags">
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">React</span>
-        <span class="skill-tag">Node.js</span>
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">Linux</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-label">Communication</div>
-      <div class="skill-tags">
-        <span class="skill-tag">English (Fluent)</span>
-        <span class="skill-tag">Afrikaans (Fluent)</span>
-        <span class="skill-tag">Cross-cultural</span>
-        <span class="skill-tag">Stakeholder Liaison</span>
-        <span class="skill-tag">Presentation</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-label">Creative</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Photography</span>
-        <span class="skill-tag">Photo Editing</span>
-        <span class="skill-tag">Content Delivery</span>
-        <span class="skill-tag">Visual Composition</span>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-header reveal">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Education</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="edu-list">
-    <div class="edu-item reveal">
-      <div class="edu-year">2011 – 2015</div>
-      <div>
-        <div class="edu-degree">Matric</div>
-        <div class="edu-inst">Jeugland High School</div>
-      </div>
+  <!-- REPOS -->
+  <section id="repos">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Repos</h2>
+      <div class="section-line" aria-hidden="true"></div>
     </div>
-    <div class="edu-item reveal">
-      <div class="edu-year">2011 – 2015</div>
-      <div>
-        <div class="edu-degree">English Language Certificate</div>
-        <div class="edu-inst">CELTA 120hr · CERTESOL 60hr</div>
-      </div>
+    <div class="repo-grid reveal">
+      <a href="https://github.com/itsnotalwin" target="_blank" rel="noopener noreferrer" class="repo-card">
+        <div class="repo-status wip"><span class="repo-status-dot" aria-hidden="true"></span>In Progress</div>
+        <div class="repo-name">Shipment Tracker</div>
+        <div class="repo-desc">Operational dashboard for tracking consignments, waybill status, and delivery milestones across active import/export cycles.</div>
+        <div class="repo-link">github.com/itsnotalwin →</div>
+      </a>
+      <a href="https://github.com/itsnotalwin" target="_blank" rel="noopener noreferrer" class="repo-card">
+        <div class="repo-status wip"><span class="repo-status-dot" aria-hidden="true"></span>In Progress</div>
+        <div class="repo-name">Overtime Logger</div>
+        <div class="repo-desc">Shift logging tool for overnight operations with automatic day rollover, shift categorisation, and weekly summaries.</div>
+        <div class="repo-link">github.com/itsnotalwin →</div>
+      </a>
+      <a href="https://github.com/itsnotalwin" target="_blank" rel="noopener noreferrer" class="repo-card">
+        <div class="repo-status wip"><span class="repo-status-dot" aria-hidden="true"></span>In Progress</div>
+        <div class="repo-name">This Portfolio</div>
+        <div class="repo-desc">The source for this site. Dark minimal CV portfolio built with vanilla HTML, CSS, and JS. No frameworks, no dependencies.</div>
+        <div class="repo-link">github.com/itsnotalwin →</div>
+      </a>
+      <a href="https://github.com/itsnotalwin" target="_blank" rel="noopener noreferrer" class="repo-card">
+        <div class="repo-status"><span class="repo-status-dot" aria-hidden="true"></span>Planning</div>
+        <div class="repo-name">More Coming</div>
+        <div class="repo-desc">Actively building. Follow the GitHub profile to see what ships next.</div>
+        <div class="repo-link">github.com/itsnotalwin →</div>
+      </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-header reveal">
-    <span class="section-num">05</span>
-    <h2 class="section-title">Contact</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="contact-inner reveal">
-    <div class="contact-cta">
-      <span>Let's</span>
-      <span>Work</span>
-      <span style="color:var(--white)">Together</span>
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line" aria-hidden="true"></div>
     </div>
-    <div class="contact-links">
-      <a href="mailto:alwin.newman97@gmail.com" class="contact-link">alwin.newman97@gmail.com</a>
-      <a href="tel:+27730958363" class="contact-link">+27 73 095 8363</a>
-      <a href="https://github.com/itsnotalwin" target="_blank" class="contact-link">github.com/itsnotalwin</a>
+    <div class="edu-list">
+      <div class="edu-item reveal">
+        <div class="edu-year">2011 – 2015</div>
+        <div>
+          <div class="edu-degree">Matric</div>
+          <div class="edu-inst">Jeugland High School</div>
+        </div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-year">2011 – 2015</div>
+        <div>
+          <div class="edu-degree">English Language Certificate</div>
+          <div class="edu-inst">CELTA 120hr · CERTESOL 60hr</div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- AVAILABILITY -->
+  <section id="availability">
+    <div class="section-header reveal">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Availability</h2>
+      <div class="section-line" aria-hidden="true"></div>
+    </div>
+    <div class="avail-grid reveal">
+      <div class="avail-block">
+        <div class="avail-block-label">Open To</div>
+        <div class="avail-roles">
+          <div class="avail-role">Freight Forwarding &amp; Customs Coordination</div>
+          <div class="avail-role">Supply Chain &amp; Operations Management</div>
+          <div class="avail-role">Process Automation &amp; Systems</div>
+          <div class="avail-role">Tech-adjacent &amp; Hybrid Ops Roles</div>
+          <div class="avail-role">Cross-border Logistics &amp; Compliance</div>
+        </div>
+      </div>
+      <div class="avail-block">
+        <div class="avail-block-label">Status</div>
+        <div class="avail-meta">
+          <div class="avail-row">
+            <div class="avail-row-label">Availability</div>
+            <div class="avail-row-value"><span class="avail-status-dot" aria-hidden="true"></span>Actively looking</div>
+          </div>
+          <div class="avail-row">
+            <div class="avail-row-label">Location</div>
+            <div class="avail-row-value">Gauteng, South Africa — open to remote</div>
+          </div>
+          <div class="avail-row">
+            <div class="avail-row-label">Notice Period</div>
+            <div class="avail-row-value">Available immediately</div>
+          </div>
+          <div class="avail-row">
+            <div class="avail-row-label">Work Type</div>
+            <div class="avail-row-value">Full-time · Contract · Hybrid</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header reveal">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line" aria-hidden="true"></div>
+    </div>
+    <div class="contact-inner reveal">
+      <div class="contact-cta">
+        <span>Available</span>
+        <span>For The</span>
+        <span>Right Role</span>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link copyable" data-copy="alwin.newman97@gmail.com" onclick="copyToClipboard(this); return false;" href="mailto:alwin.newman97@gmail.com" aria-label="Copy email address">alwin.newman97@gmail.com</a>
+        <a class="contact-link copyable" data-copy="+27 73 095 8363" onclick="copyToClipboard(this); return false;" href="tel:+27730958363" aria-label="Copy phone number">+27 73 095 8363</a>
+        <a href="https://www.linkedin.com/in/alwinnewman/" target="_blank" rel="noopener noreferrer" class="contact-link">linkedin.com/in/alwinnewman</a>
+        <a href="https://github.com/itsnotalwin" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/itsnotalwin</a>
+      </div>
+    </div>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form reveal" aria-label="Contact form">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Message" rows="4" required></textarea>
+      <button type="submit" class="print-btn">Send Message ↗</button>
+    </form>
+  </section>
+</main>
 
 <footer>
-  <span>Alwin Newman · 2025</span>
+  <span>Alwin Newman · <time datetime="2025">2025</time></span>
   <span>Gauteng, South Africa</span>
 </footer>
 
 <script>
+  // Email Copy
+  function copyToClipboard(el) {
+    const text = el.dataset.copy;
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(text).then(() => {
+      const original = el.textContent;
+      el.textContent = '✓ Copied';
+      el.classList.add('copy-success');
+      setTimeout(() => { el.textContent = original; el.classList.remove('copy-success'); }, 1500);
+    });
+  }
+
+  // Nav scroll + progress bar
   const navbar = document.getElementById('navbar');
+  const progressBar = document.getElementById('progress-bar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  // Mobile nav toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  function toggleNav(state) {
+    navLinks.classList.toggle('active', state);
+    navToggle.setAttribute('aria-expanded', String(state));
+    if (state) navLinks.querySelector('a')?.focus();
+  }
+  navToggle.addEventListener('click', () => toggleNav(!navLinks.classList.contains('active')));
+  document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => toggleNav(false)));
+  document.addEventListener('click', e => { if (!navbar.contains(e.target)) toggleNav(false); });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.includes('Mac');
+    if ((isMac ? e.metaKey : e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'd') {
+      e.preventDefault();
+      document.getElementById('theme-toggle').click();
+    }
+    if (e.key === 'Escape') toggleNav(false);
   });
 
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
+  // Active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
       }
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => navObserver.observe(s));
+
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Live clock JHB
+  function updateClock() {
+    const el = document.getElementById('clock-time');
+    if (el) el.textContent = new Date().toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Africa/Johannesburg' });
+  }
+  updateClock(); setInterval(updateClock, 1000);
+
+  // Theme toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+  }
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) setTheme(savedTheme);
+  else if (prefersDark.matches) setTheme('dark');
+  else setTheme('light');
+  themeToggle.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'));
+  prefersDark.addEventListener('change', e => { if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light'); });
 </script>
+
 </body>
 </html>
