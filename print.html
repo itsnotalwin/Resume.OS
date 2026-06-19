@@ -4,82 +4,108 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Alwin Newman — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --black: #080808;
-    --white: #f0f0f0;
-    --grey: #888;
-    --dim: #444;
-    --line: #2a2a2a;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Mono', monospace;
-    font-weight: 300;
-    padding: 4rem;
-    max-width: 900px;
-    margin: 0 auto;
+    --bg:     #060606;
+    --text-1: #d4d4d4;
+    --text-2: #868686;
+    --text-3: #464646;
+    --text-4: #222222;
+    --line:   #131313;
+    --line-v: #202020;
+    --f-d: 'Bebas Neue', sans-serif;
+    --f-m: 'DM Mono', monospace;
   }
 
-  /* PRINT BUTTON */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg); color: var(--text-1);
+    font-family: var(--f-m); font-weight: 300;
+    padding: 3.5rem 4rem; max-width: 860px; margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Print bar */
   .print-bar {
     display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line);
+    margin-bottom: 3rem; padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line-v);
   }
-  .print-bar span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); }
+  .print-bar span { font-size: 0.57rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
   .print-trigger {
-    font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--grey); border: 1px solid var(--dim);
-    padding: 0.4rem 1rem; background: transparent; cursor: pointer; transition: all 0.2s;
+    font-family: var(--f-m); font-size: 0.57rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-2);
+    border: 1px solid var(--line-v); padding: 0.4rem 1rem;
+    background: transparent; cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
   }
-  .print-trigger:hover { color: var(--white); border-color: var(--grey); }
+  .print-trigger:hover { color: var(--text-1); border-color: var(--text-3); }
 
-  /* HEADER */
-  .cv-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
-  .cv-name { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 0.9; letter-spacing: -0.01em; margin-bottom: 0.6rem; }
-  .cv-title { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--grey); margin-bottom: 1.5rem; }
-  .cv-contacts { display: flex; gap: 2rem; flex-wrap: wrap; }
-  .cv-contact { font-size: 0.7rem; color: #999; letter-spacing: 0.05em; }
+  /* Header */
+  .cv-head { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line-v); }
+  .cv-name { font-family: var(--f-d); font-size: 4.5rem; line-height: 0.9; letter-spacing: 0.01em; color: var(--text-1); margin-bottom: 0.6rem; }
+  .cv-title { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.4rem; }
+  .cv-contacts { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  .cv-contact { font-size: 0.72rem; color: var(--text-2); letter-spacing: 0.05em; }
 
-  /* SECTION */
-  .cv-section { margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--line); }
+  /* Section */
+  .cv-section { margin-bottom: 2.2rem; padding-bottom: 2.2rem; border-bottom: 1px solid var(--line); }
   .cv-section:last-child { border-bottom: none; }
-  .cv-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.1em; margin-bottom: 1.5rem; color: var(--grey); }
+  .cv-section-title {
+    font-family: var(--f-d); font-size: 1.5rem;
+    letter-spacing: 0.1em; color: var(--text-3);
+    margin-bottom: 1.3rem;
+  }
 
-  /* EXPERIENCE */
-  .cv-exp { margin-bottom: 1.8rem; }
+  /* Profile */
+  .cv-profile { font-size: 0.83rem; line-height: 1.9; color: var(--text-2); }
+
+  /* Experience */
+  .cv-exp { margin-bottom: 1.6rem; }
   .cv-exp:last-child { margin-bottom: 0; }
-  .cv-exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem; }
-  .cv-exp-company { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.08em; }
-  .cv-exp-period { font-size: 0.62rem; color: var(--grey); letter-spacing: 0.15em; text-transform: uppercase; }
-  .cv-exp-role { font-size: 0.65rem; color: var(--grey); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.7rem; }
-  .cv-exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-  .cv-exp-points li { font-size: 0.75rem; color: #999; padding-left: 1.1rem; position: relative; line-height: 1.7; }
-  .cv-exp-points li::before { content: '↳'; position: absolute; left: 0; color: var(--dim); }
+  .cv-exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+  .cv-exp-company { font-family: var(--f-d); font-size: 1rem; letter-spacing: 0.08em; color: var(--text-1); }
+  .cv-exp-period  { font-size: 0.6rem; color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase; }
+  .cv-exp-role    { font-size: 0.6rem; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.65rem; }
+  .cv-exp-points  { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .cv-exp-points li { font-size: 0.78rem; color: var(--text-2); padding-left: 1.1rem; position: relative; line-height: 1.75; }
+  .cv-exp-points li::before { content: '↳'; position: absolute; left: 0; color: var(--text-4); }
 
-  /* SKILLS */
+  /* Skills */
   .cv-skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .cv-skill-group-label { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.6rem; }
-  .cv-skill-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-  .cv-skill-tag { font-size: 0.62rem; padding: 0.2rem 0.55rem; border: 1px solid var(--dim); color: #888; }
+  .cv-skill-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.55rem; }
+  .cv-skill-tags  { display: flex; flex-wrap: wrap; gap: 5px; }
+  .cv-skill-tag   { font-size: 0.65rem; padding: 3px 8px; border: 1px solid var(--line-v); color: var(--text-2); }
 
-  /* EDUCATION */
-  .cv-edu { display: flex; justify-content: space-between; align-items: baseline; padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+  /* Education */
+  .cv-edu { display: flex; justify-content: space-between; align-items: baseline; padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
   .cv-edu:last-child { border-bottom: none; }
-  .cv-edu-degree { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.08em; }
-  .cv-edu-inst { font-size: 0.65rem; color: var(--grey); margin-top: 0.15rem; }
-  .cv-edu-year { font-size: 0.6rem; color: var(--grey); letter-spacing: 0.12em; text-transform: uppercase; }
+  .cv-edu-degree { font-family: var(--f-d); font-size: 0.95rem; letter-spacing: 0.08em; color: var(--text-1); }
+  .cv-edu-inst   { font-size: 0.65rem; color: var(--text-3); margin-top: 3px; }
+  .cv-edu-year   { font-size: 0.6rem; color: var(--text-3); letter-spacing: 0.12em; text-transform: uppercase; }
 
-  /* PRINT STYLES */
+  /* Print styles */
   @media print {
-    @page { margin: 1.5cm; size: A4; }
-    body { background: #fff; color: #111; padding: 0; }
-    :root { --black: #fff; --white: #111; --grey: #555; --dim: #999; --line: #ddd; }
+    @page { margin: 1.4cm; size: A4; }
+    body { background: #ffffff; color: #111111; padding: 0; font-size: 9.5pt; }
+    :root {
+      --bg: #fff; --text-1: #111; --text-2: #444;
+      --text-3: #777; --text-4: #bbb; --line: #ddd; --line-v: #ccc;
+    }
     .print-bar { display: none; }
-    .cv-name { font-size: 4rem; }
+    .cv-name { font-size: 3.2rem; }
+    .cv-skill-tags, .cv-contacts { gap: 6px; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 2rem 1.5rem; }
+    .cv-name { font-size: 3rem; }
+    .cv-skills-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .cv-exp-header { flex-direction: column; gap: 3px; }
   }
 </style>
 </head>
@@ -90,7 +116,7 @@
   <button class="print-trigger" onclick="window.print()">↓ Print / Save as PDF</button>
 </div>
 
-<div class="cv-header">
+<div class="cv-head">
   <div class="cv-name">Alwin Newman</div>
   <div class="cv-title">Customs &amp; Logistics Coordinator</div>
   <div class="cv-contacts">
@@ -104,9 +130,7 @@
 
 <div class="cv-section">
   <div class="cv-section-title">Profile</div>
-  <p style="font-size:0.82rem;line-height:1.9;color:#aaa;">
-    Operations-focused logistics professional with experience coordinating import and export shipments, customs documentation, freight movements, and warehouse workflows in fast-paced environments. Skilled in client communication, operational problem-solving, compliance processes, and team coordination with a strong focus on accuracy, efficiency, and service delivery.
-  </p>
+  <p class="cv-profile">Operations-focused logistics professional with experience coordinating import and export shipments, customs documentation, freight movements, and warehouse workflows in fast-paced environments. Skilled in client communication, operational problem-solving, compliance processes, and team coordination with a strong focus on accuracy, efficiency, and service delivery.</p>
 </div>
 
 <div class="cv-section">
@@ -118,7 +142,7 @@
     </div>
     <div class="cv-exp-role">Customs &amp; Logistics Coordinator</div>
     <ul class="cv-exp-points">
-      <li>Coordinate daily import and export shipment workflows including customs documentation, cargo tracking, and delivery scheduling</li>
+      <li>Coordinate daily import and export workflows including customs documentation, cargo tracking, and delivery scheduling</li>
       <li>Prepare and process shipping, invoicing, and customs documentation ensuring SARS compliance</li>
       <li>Monitor cross-border shipments and resolve delays, discrepancies, and operational escalations</li>
       <li>Generate Excel-based operational reports and maintain accurate shipment and workflow records</li>
@@ -133,10 +157,10 @@
     </div>
     <div class="cv-exp-role">English Language Instructor</div>
     <ul class="cv-exp-points">
-      <li>Planned and delivered structured English lessons for students across varying proficiency levels</li>
-      <li>Adapted teaching methods and communication styles to improve engagement and learning outcomes</li>
+      <li>Planned and delivered structured English lessons across varying proficiency levels</li>
+      <li>Adapted teaching methods to improve engagement and individual learning outcomes</li>
       <li>Managed classroom coordination, lesson preparation, and student progress assessment</li>
-      <li>Developed strong cross-cultural communication and presentation skills</li>
+      <li>Built strong cross-cultural communication and presentation skills</li>
     </ul>
   </div>
   <div class="cv-exp">
@@ -155,7 +179,7 @@
   <div class="cv-section-title">Skills</div>
   <div class="cv-skills-grid">
     <div>
-      <div class="cv-skill-group-label">Logistics &amp; Customs</div>
+      <div class="cv-skill-label">Logistics &amp; Customs</div>
       <div class="cv-skill-tags">
         <span class="cv-skill-tag">Import &amp; Export</span>
         <span class="cv-skill-tag">Customs Documentation</span>
@@ -165,7 +189,7 @@
       </div>
     </div>
     <div>
-      <div class="cv-skill-group-label">Operations</div>
+      <div class="cv-skill-label">Operations</div>
       <div class="cv-skill-tags">
         <span class="cv-skill-tag">Warehouse Coordination</span>
         <span class="cv-skill-tag">Invoice Processing</span>
@@ -175,7 +199,7 @@
       </div>
     </div>
     <div>
-      <div class="cv-skill-group-label">Technical &amp; Creative</div>
+      <div class="cv-skill-label">Technical &amp; Creative</div>
       <div class="cv-skill-tags">
         <span class="cv-skill-tag">Excel Reporting</span>
         <span class="cv-skill-tag">JavaScript</span>
@@ -207,7 +231,7 @@
 
 <div class="cv-section">
   <div class="cv-section-title">Languages</div>
-  <p style="font-size:0.78rem;color:#999;">English (Fluent) &nbsp;·&nbsp; Afrikaans (Fluent)</p>
+  <p style="font-size:0.8rem;color:var(--text-2);letter-spacing:0.05em;">English (Fluent) &nbsp;·&nbsp; Afrikaans (Fluent)</p>
 </div>
 
 </body>
